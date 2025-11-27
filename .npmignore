@@ -1,0 +1,22 @@
+# 忽略目录
+.idea
+.vscode
+scripts/
+packages/
+public/
+node_modules/
+src/
+types/
+vite/
+yarn.lock
+pnpm-lock.yaml
+ 
+# 忽略指定文件
+vite.config.ts
+tsconfig.json
+tsconfig.app.json
+tsconfig.node.json
+.prettierrc.json
+.eslintrc.cjs
+.gitignore
+*.map
