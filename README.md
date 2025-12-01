@@ -15,10 +15,13 @@ vue3 markdown编辑器
 ```
 // index.vue
 <template>
-  <MarkdownEditor :options="options" />
+  <MarkdownEditor :options="options" :class="className" @mouseup="onMouseup" @mousedown="onMousedown" />
 </template>
 <script setup lang="ts">
-  import { Editor } from 'vue-markdown-pro'
+  import { MarkdownEditor } from 'vue-markdown-pro'
   const options = { content: '' }
+  const className = 'markdown-editor-container'
+  const onMouseup = (e: MouseEvent) => {}
+  const onMousedown = (e: MouseEvent) => {}
 </script>
 ```

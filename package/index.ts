@@ -1,3 +1,4 @@
+import { Editor } from '@tiptap/vue-3'
 import  getMarkdownEditor from './Editor/tiptap'
 import MarkdownEditor from './Editor/index.vue'
 import type { App } from 'vue'
@@ -15,5 +16,5 @@ if (typeof windowObj !== 'undefined' && windowObj.Vue) {
   install(vm)
 }
 
-export { MarkdownEditor, getMarkdownEditor }
+export { MarkdownEditor, getMarkdownEditor, Editor }
 export default { install }
