@@ -9,19 +9,19 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 // 所有需要外部化的依赖（非核心，用户需自行安装的）
 const externalDependencies = [
   'vue',
-  '@tiptap/pm',
-  '@tiptap/vue-3',
-  '@tiptap/starter-kit',
-  '@tiptap/extension-color',
-  '@tiptap/extension-highlight',
-  '@tiptap/extension-table',
-  '@tiptap/extension-table-cell',
-  '@tiptap/extension-table-header',
-  '@tiptap/extension-table-row',
-  '@tiptap/extension-text-style',
-  '@tiptap/extension-underline',
-  'tiptap-markdown',
-  'vue-tiptap-mermaid'
+  // '@tiptap/pm',
+  // '@tiptap/vue-3',
+  // '@tiptap/starter-kit',
+  // '@tiptap/extension-color',
+  // '@tiptap/extension-highlight',
+  // '@tiptap/extension-table',
+  // '@tiptap/extension-table-cell',
+  // '@tiptap/extension-table-header',
+  // '@tiptap/extension-table-row',
+  // '@tiptap/extension-text-style',
+  // '@tiptap/extension-underline',
+  // 'tiptap-markdown',
+  // 'vue-tiptap-mermaid'
 ]
 
 export default defineConfig(({ mode }) => {
