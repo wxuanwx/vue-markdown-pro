@@ -4,9 +4,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { EditorContent } from '@tiptap/vue-3'
 import type { Editor, EditorOptions } from '@tiptap/vue-3'
-import getMarkdownEditor from './tiptap'
+import getMarkdownEditor, { EditorContent } from './tiptap'
 import './index.scss'
 
 const props = defineProps<{

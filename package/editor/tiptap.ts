@@ -11,6 +11,7 @@ import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
 import { Markdown } from 'tiptap-markdown'
 import MarkdownMermaid from 'vue-tiptap-mermaid'
+import { EditorContent } from '@tiptap/vue-3'
 
 function getMarkdownEditor(options?: Partial<EditorOptions>): Editor {
   const markdownEditor = new Editor({
@@ -66,7 +67,4 @@ function getMarkdownEditor(options?: Partial<EditorOptions>): Editor {
 
 export default getMarkdownEditor
 
-// export { Editor }
-
-// import type { Editor, EditorOptions } from '@tiptap/vue-3';
-// export type { Editor, EditorOptions };
+export { Editor, EditorContent }
