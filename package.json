@@ -1,6 +1,6 @@
 {
   "name": "vue-markdown-pro",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "type": "module",
   "description": "vue3 markdown编辑器",
   "main": "lib/index.umd.js",

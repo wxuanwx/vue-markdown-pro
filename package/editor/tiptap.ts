@@ -1,5 +1,4 @@
-import { Editor } from '@tiptap/vue-3'
-import type { EditorOptions }  from '@tiptap/vue-3'
+import { Editor, type EditorOptions } from '@tiptap/vue-3'
 import Underline from '@tiptap/extension-underline'
 import { Color } from '@tiptap/extension-color'
 import {TextStyle} from '@tiptap/extension-text-style'
@@ -68,3 +67,4 @@ function getMarkdownEditor(options?: Partial<EditorOptions>): Editor {
 export default getMarkdownEditor
 
 export { Editor, EditorContent }
+export type { EditorOptions }

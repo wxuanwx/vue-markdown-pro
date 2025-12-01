@@ -16,4 +16,5 @@ if (typeof windowObj !== 'undefined' && windowObj.Vue) {
 }
 
 export { MarkdownEditor, getMarkdownEditor, Editor, EditorContent }
+export type { EditorOptions } from '@tiptap/vue-3'
 export default { install }
