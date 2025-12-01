@@ -1,6 +1,6 @@
 import { Editor } from '@tiptap/vue-3'
-import  getMarkdownEditor from './Editor/tiptap'
-import MarkdownEditor from './Editor/index.vue'
+import  getMarkdownEditor from './editor/tiptap'
+import MarkdownEditor from './editor/index.vue'
 import type { App } from 'vue'
 const components = [MarkdownEditor]
 const install = (Vue: App) => {

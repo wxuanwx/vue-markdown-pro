@@ -1,43 +1,86 @@
 import { defineConfig } from 'vite'
-import path, { join } from 'path'
-import dts from 'vite-plugin-dts'
 import vue from '@vitejs/plugin-vue'
+import dts from 'vite-plugin-dts'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
-export default defineConfig(({ command, mode }) => {
-  const isBuild = command == 'build'
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+// 所有需要外部化的依赖（非核心，用户需自行安装的）
+const externalDependencies = [
+  'vue',
+  '@tiptap/pm',
+  '@tiptap/vue-3',
+  '@tiptap/starter-kit',
+  '@tiptap/extension-color',
+  '@tiptap/extension-highlight',
+  '@tiptap/extension-table',
+  '@tiptap/extension-table-cell',
+  '@tiptap/extension-table-header',
+  '@tiptap/extension-table-row',
+  '@tiptap/extension-text-style',
+  '@tiptap/extension-underline',
+  'tiptap-markdown',
+  'vue-tiptap-mermaid'
+]
+
+export default defineConfig(({ mode }) => {
+  // const isBuild = command === 'build';
+  const isProd = mode === 'production'
+
   return {
     publicPath: '/',
     plugins: [
-      //生成ts声明文件
+      vue(),
       dts({
-        include: './package'
-      }),
-      vue()
-    ],
-    //设置别名
+        entryRoot: 'package',
+        outDir: 'lib',
+        staticImport: true,  // 静态导入，优化 Tree Shaking
+        tsconfigPath: 'tsconfig.app.json',
+        include: ['package/**/*'],
+        exclude: ['package/**/__tests__/*', 'package/**/*.stories.ts'],
+        cleanVueFileName: true, // 清理 Vue 组件的 .vue.d.ts 后缀（可选）
+        insertTypesEntry: true
+      })
+    ].filter(Boolean),
     resolve: {
       alias: {
-        '@/package': join(__dirname, './package/')
+        '@/package': path.resolve(__dirname, './package') // 确保别名正确
       },
-      extensions: ['.vue', '.js', '.json', '.ts', '.tsx'] //使用别名省略的后缀名
+      extensions: ['.vue', '.js', '.json', '.ts', '.tsx']
     },
     build: {
-      outDir: 'lib', //输出文件名称
+      target: 'ES2020', // 兼容现代浏览器，避免过度转译（减小体积）
+      outDir: 'lib',
+      minify: 'esbuild', // 生产环境压缩（esbuild 比 terser 快且压缩率高）
+      sourcemap: false, // 生产环境不生成 sourcemap（减小体积）
       lib: {
-        entry: join(__dirname, './package/index.ts'), //指定组件编译入口文件
-        name: 'editor',
-        fileName: (format) => `index.${format}.js` // 打包后的文件名
-      }, //库编译模式配置
+        entry: path.resolve(__dirname, 'package/index.ts'), // 组件入口
+        name: 'VueMarkdownPro', // UMD 全局变量名
+        fileName: (format) => `index.${format}.js`,
+        formats: ['es', 'umd'] // 只生成两种核心格式（足够兼容）
+      },
       rollupOptions: {
-        // 确保外部化处理那些你不想打包进库的依赖
-        external: ['vue'],
+        // 核心：外部化所有依赖，不打包进产物
+        external: externalDependencies,
         output: {
-          // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
-          globals: {
-            vue: 'Vue'
-          }
+          // UMD 格式下，映射依赖到全局变量（确保用户使用时能找到依赖）
+          // globals: {
+          //   vue: 'Vue'
+          // },
+          // 生产环境：移除注释和调试代码
+          comments: false,
+          // 优化：启用 Tree Shaking
+          exports: 'named' // 明确导出名称，方便摇树
         }
-      } // rollup打包配置
+      },
+      // 样式优化：压缩 CSS，提取单独文件
+      cssCodeSplit: true, // 生产环境拆分 CSS（避免内联到 JS）
+      cssMinify: 'esbuild' // 压缩 CSS
+    },
+    // 开发环境优化：避免不必要的转译
+    esbuild: {
+      drop: isProd ? ['console', 'debugger'] : [] // 生产环境移除 console 和 debugger
     }
   }
 })
