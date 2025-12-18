@@ -64,10 +64,9 @@ export default defineConfig(({ mode }) => {
         // 核心：外部化所有依赖，不打包进产物
         external: externalDependencies,
         output: {
-          // UMD 格式下，映射依赖到全局变量（确保用户使用时能找到依赖）
-          // globals: {
-          //   vue: 'Vue'
-          // },
+           globals: {
+            'vue': 'vue',
+          },
           // 生产环境：移除注释和调试代码
           comments: false,
           // 优化：启用 Tree Shaking

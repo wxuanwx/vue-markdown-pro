@@ -27,7 +27,8 @@ function getMarkdownEditor(options?: Partial<EditorOptions>): Editor {
         HTMLAttributes: {
           class: 'tiptap-markdown-table',
           contenteditable: false
-        }
+        },
+        renderWrapper: true
       }),
       TableRow.configure({
         HTMLAttributes: {

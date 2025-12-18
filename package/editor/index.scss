@@ -147,6 +147,10 @@
     outline: none;
     border: none;
   }
+  .tableWrapper {
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
   .tiptap-markdown-table {
     border-collapse: collapse;
     margin: 20px 0;
